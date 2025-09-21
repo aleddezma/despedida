@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Despedida de Soltera - Mariann</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #FDFBF5;
+            --text-color: #4A4A4A;
+            --primary-accent: #C09553;
+            --secondary-accent: #A7B6A9;
+            --dark-accent: #3D403D;
+        }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-color); color: var(--text-color); }
+        .font-serif-display { font-family: 'Dancing Script', cursive; }
+        .hero-bg { background-image: url('https://images.unsplash.com/photo-1527529482837-4698179dc6ce?q=80&w=2070&auto=format&fit=crop'); }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* --- Animation Styles --- */
+        #animation-preloader .path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: draw-line 1.5s ease-in-out forwards;
+        }
+        #animation-preloader .heart { animation-delay: 0.3s; }
+        #animation-preloader .u-path { animation-delay: 0.8s; }
+
+        @keyframes draw-line {
+            to { stroke-dashoffset: 0; }
+        }
+
+        #animation-preloader .fill-heart {
+            animation: fill-effect 0.5s ease-in forwards 1.8s;
+        }
+
+        @keyframes fill-effect {
+            from { fill: transparent; }
+            to { fill: var(--primary-accent); }
+        }
+
+        /* --- Animated Button Styles --- */
+        .animated-button {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: color 0.5s ease-in-out;
+        }
+        .animated-button span {
+            position: relative;
+            z-index: 2;
+        }
+        .animated-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150%;
+            padding-bottom: 150%;
+            background-color: var(--dark-accent);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: -1;
+        }
+        .animated-button:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        .animated-button:hover {
+            color: #ffffff;
+        }
+        
+        /* --- Icon Animation --- */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .floating-icon {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="antialiased overflow-hidden">
+
+    <!-- Animation Preloader -->
+    <div id="animation-preloader" class="fixed inset-0 flex justify-center items-center z-50 transition-opacity duration-1000 ease-in-out" style="background-color: var(--bg-color);">
+        <svg width="250" height="100" viewBox="0 0 250 100">
+            <line class="path" x1="40" y1="20" x2="40" y2="80" stroke-linecap="round" stroke-width="8" stroke="var(--primary-accent)"/>
+            <path class="path heart fill-heart" d="M125,30 C110,10 80,15 80,40 C80,65 125,90 125,90 C125,90 170,65 170,40 C170,15 140,10 125,30 Z" stroke-linecap="round" stroke-width="8" stroke="var(--primary-accent)" fill="none"/>
+            <path class="path u-path" d="M190 20 V 55 C 190 75 230 75 230 55 V 20" stroke-linecap="round" stroke-width="8" stroke="var(--primary-accent)" fill="none"/>
+        </svg>
+    </div>
+
+    <main id="main-content" class="opacity-0 transition-opacity duration-500">
+        <!-- Hero Section -->
+        <section class="h-screen w-full relative hero-bg bg-cover bg-center flex flex-col justify-center items-center text-center">
+            <div class="absolute inset-0 bg-black/50"></div>
+            <div class="relative z-10 p-8 text-white">
+                <div class="reveal visible">
+                    <p class="text-2xl md:text-3xl tracking-widest text-white/90">Estás invitada a la</p>
+                    <h1 class="font-serif-display text-8xl md:text-9xl my-4 text-white" style="color: #FFF; text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">Despedida de Mariann</h1>
+                    <p class="py-2 px-5 inline-block text-xl font-semibold tracking-wider border-2 border-white rounded-md mt-4">#CheersToMariann</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Invitation Details Section -->
+        <section class="py-24">
+            <div class="container mx-auto text-center px-6">
+                <div class="reveal">
+                    <i class="fas fa-champagne-glasses text-4xl mb-6 floating-icon" style="color: var(--primary-accent);"></i>
+                    <h2 class="text-4xl md:text-5xl font-light mb-6">Con mucha alegría quiero invitarte a la despedida de soltera de mi hija Mariann</h2>
+                    <p class="text-xl text-gray-700 mb-16 max-w-3xl mx-auto leading-relaxed">Será una tarde muy especial para compartir y acompañarla en esta nueva etapa de su vida.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <div class="reveal bg-white p-10 rounded-lg shadow-md border-t-8" style="border-color: var(--primary-accent);">
+                        <i class="fas fa-calendar-alt text-5xl mb-5"></i>
+                        <h3 class="font-bold text-2xl">SÁBADO, 18 OCT.</h3>
+                    </div>
+                    <div class="reveal bg-white p-10 rounded-lg shadow-md border-t-8" style="border-color: var(--secondary-accent); transition-delay: 150ms;">
+                        <i class="fas fa-clock text-5xl mb-5"></i>
+                        <h3 class="font-bold text-2xl">5:00 PM</h3>
+                    </div>
+                    <div class="reveal bg-white p-10 rounded-lg shadow-md border-t-8 flex flex-col justify-center items-center" style="border-color: var(--dark-accent); transition-delay: 300ms;">
+                        <i class="fas fa-map-marker-alt text-5xl mb-5"></i>
+                        <h3 class="font-bold text-2xl">BANQUETES GERO'S</h3>
+                        <a href="https://maps.app.goo.gl/KQd1mCyHV8YXS1C8A" target="_blank" class="mt-4 text-lg font-semibold text-gray-600 hover:text-gray-900 underline transition-colors decoration-2 underline-offset-4">
+                            <i class="fas fa-map-pin"></i> Ver Ubicación
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Itinerario del Evento -->
+        <section class="py-24" style="background-color: #F8F4EA;">
+            <div class="container mx-auto px-6 text-center reveal">
+                <i class="far fa-hourglass text-5xl mb-6 floating-icon" style="color: var(--primary-accent); animation-delay: 0.5s;"></i>
+                <h2 class="text-4xl md:text-5xl font-light mb-12">Itinerario</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-4xl mx-auto">
+                    <div class="flex flex-col items-center">
+                        <div class="bg-white rounded-full p-4 shadow-md mb-4">
+                            <i class="fas fa-cocktail text-2xl" style="color: var(--primary-accent);"></i>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold">5:00 PM</p>
+                            <p class="text-xl text-gray-600">Cóctel de Bienvenida</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="bg-white rounded-full p-4 shadow-md mb-4">
+                            <i class="fas fa-dice text-2xl" style="color: var(--secondary-accent);"></i>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold">6:30 PM</p>
+                            <p class="text-xl text-gray-600">Juegos y Sorpresas</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="bg-white rounded-full p-4 shadow-md mb-4">
+                            <i class="fas fa-utensils text-2xl" style="color: var(--dark-accent);"></i>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold">8:00 PM</p>
+                            <p class="text-xl text-gray-600">Cena y Brindis</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Gift Suggestion Section -->
+        <section class="py-24 bg-white">
+            <div class="container mx-auto text-center px-6 reveal">
+                <i class="fas fa-envelope-open-text text-6xl mb-6 floating-icon" style="color: var(--primary-accent);"></i>
+                <h2 class="text-4xl md:text-5xl font-light mb-6">Sugerencia de Regalo</h2>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">La compañía de sus seres queridos es lo más importante. Si además desean tener un detalle, se sugiere una "lluvia de sobres" para ayudarla a comenzar esta nueva etapa. ¡Infinitas gracias por su generosidad!</p>
+            </div>
+        </section>
+
+        <!-- Countdown & RSVP -->
+        <section class="py-24">
+            <div class="container mx-auto text-center px-6">
+                <div class="reveal">
+                    <h2 class="text-4xl md:text-5xl font-light mb-8">¡La cuenta regresiva!</h2>
+                    <div id="countdown" class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-3xl mx-auto mb-16">
+                        <div><span id="days" class="text-6xl font-bold" style="color: var(--primary-accent);">0</span><span class="block text-lg uppercase tracking-widest mt-2">Días</span></div>
+                        <div><span id="hours" class="text-6xl font-bold" style="color: var(--primary-accent);">0</span><span class="block text-lg uppercase tracking-widest mt-2">Horas</span></div>
+                        <div><span id="minutes" class="text-6xl font-bold" style="color: var(--primary-accent);">0</span><span class="block text-lg uppercase tracking-widest mt-2">Minutos</span></div>
+                        <div><span id="seconds" class="text-6xl font-bold" style="color: var(--primary-accent);">0</span><span class="block text-lg uppercase tracking-widest mt-2">Segundos</span></div>
+                    </div>
+                    <p class="text-xl text-gray-700 mb-8">Por favor, confirma tu asistencia antes del 10 de Octubre.</p>
+                    <div class="flex flex-col md:flex-row justify-center items-center gap-6">
+                        <a href="https://wa.me/528311223359?text=Hola,%20quiero%20confirmar%20mi%20asistencia%20a%20la%20despedida%20de%20soltera%20de%20Mariann.%20Mi%20nombre%20es:" 
+                           target="_blank" 
+                           class="animated-button text-white px-10 py-4 rounded-lg font-bold shadow-lg inline-block text-xl"
+                           style="background-color: var(--primary-accent);">
+                            <span><i class="fab fa-whatsapp"></i> Confirmar Asistencia</span>
+                        </a>
+                        <a href="#" id="addToCalendar"
+                           class="animated-button text-white px-10 py-4 rounded-lg font-bold shadow-lg inline-block text-xl"
+                           style="background-color: var(--secondary-accent);">
+                            <span><i class="fas fa-calendar-plus"></i> Añadir al Calendario</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Galería Post-Evento -->
+        <section class="py-24 bg-white">
+            <div class="container mx-auto text-center px-6 reveal">
+                <i class="fas fa-camera-retro text-6xl mb-6 floating-icon" style="color: var(--dark-accent); animation-delay: 1s;"></i>
+                <h2 class="text-4xl md:text-5xl font-light mb-6">Recuerdos de la Fiesta</h2>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+                    <strong>¡Próximamente!</strong><br>
+                    Después de la celebración, este espacio se llenará con las mejores fotos del evento. ¡Vuelve pronto para revivir los momentos más divertidos!
+                </p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-20 text-center" style="background-color: #F8F4EA;">
+            <div class="text-center">
+                <p class="text-2xl" style="color: var(--text-color);">Con cariño,</p>
+                <p class="text-4xl font-serif-display mt-2" style="color: var(--primary-accent);">Sra. Anita Mendoza</p>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Preloader Logic ---
+            const preloader = document.getElementById('animation-preloader');
+            const mainContent = document.getElementById('main-content');
+            const body = document.body;
+            const preloaderDuration = 2800; 
+
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                mainContent.style.opacity = '1';
+                body.classList.remove('overflow-hidden');
+                
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 1000); 
+            }, preloaderDuration);
+
+            // --- Countdown Logic ---
+            const eventDate = '2025-10-18T17:00:00';
+            const targetDate = new Date(eventDate);
+
+            const updateCountdown = () => {
+                const now = new Date();
+                const diff = targetDate - now;
+
+                if (diff <= 0) { 
+                    document.getElementById('countdown').innerHTML = `<p class="col-span-full text-4xl font-bold">¡El día llegó!</p>`;
+                    clearInterval(countdownInterval);
+                    return; 
+                }
+
+                document.getElementById('days').textContent = Math.floor(diff / (1000 * 60 * 60 * 24));
+                document.getElementById('hours').textContent = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+            };
+
+            const countdownInterval = setInterval(updateCountdown, 1000);
+            updateCountdown();
+
+            // --- Reveal on Scroll Logic ---
+            const revealElements = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            revealElements.forEach(el => observer.observe(el));
+            
+            // --- Add to Calendar Logic ---
+            document.getElementById('addToCalendar').addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const title = encodeURIComponent("Despedida de Soltera de Mariann");
+                const startDate = "20251018T170000";
+                const endDate = "20251018T220000";
+                const description = encodeURIComponent("¡No te pierdas la celebración de la Despedida de Soltera de Mariann!");
+                const location = encodeURIComponent("Banquetes Gero's, Cd. Mante, Tamaulipas");
+                
+                const googleCalendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${description}&location=${location}`;
+                
+                window.open(googleCalendarUrl, '_blank');
+            });
+        });
+    </script>
+</body>
+</html>
