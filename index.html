@@ -35,7 +35,7 @@
         }
         .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        /* --- Animation Styles --- */
+        /* --- Preloader Animation --- */
         #animation-preloader .path {
             stroke-dasharray: 1000;
             stroke-dashoffset: 1000;
@@ -43,62 +43,36 @@
         }
         #animation-preloader .heart { animation-delay: 0.3s; }
         #animation-preloader .u-path { animation-delay: 0.8s; }
+        @keyframes draw-line { to { stroke-dashoffset: 0; } }
+        #animation-preloader .fill-heart { animation: fill-effect 0.5s ease-in forwards 1.8s; }
+        @keyframes fill-effect { from { fill: transparent; } to { fill: var(--primary-accent); } }
 
-        @keyframes draw-line {
-            to { stroke-dashoffset: 0; }
-        }
-
-        #animation-preloader .fill-heart {
-            animation: fill-effect 0.5s ease-in forwards 1.8s;
-        }
-
-        @keyframes fill-effect {
-            from { fill: transparent; }
-            to { fill: var(--primary-accent); }
-        }
-
-        /* --- Animated Button Styles --- */
-        .animated-button {
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            transition: color 0.5s ease-in-out;
-        }
-        .animated-button span {
-            position: relative;
-            z-index: 2;
-        }
-        .animated-button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 150%;
-            padding-bottom: 150%;
-            background-color: var(--dark-accent);
-            border-radius: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            z-index: -1;
-        }
-        .animated-button:hover::before {
-            transform: translate(-50%, -50%) scale(1);
-        }
-        .animated-button:hover {
-            color: #ffffff;
-        }
+        /* --- Animated Button --- */
+        .animated-button { position: relative; overflow: hidden; z-index: 1; transition: color 0.5s ease-in-out; }
+        .animated-button span { position: relative; z-index: 2; }
+        .animated-button::before { content: ''; position: absolute; top: 50%; left: 50%; width: 150%; padding-bottom: 150%; background-color: var(--dark-accent); border-radius: 50%; transform: translate(-50%, -50%) scale(0); transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); z-index: -1; }
+        .animated-button:hover::before { transform: translate(-50%, -50%) scale(1); }
+        .animated-button:hover { color: #ffffff; }
         
         /* --- Icon Animation --- */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        .floating-icon {
-            animation: float 3s ease-in-out infinite;
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .floating-icon { animation: float 3s ease-in-out infinite; }
+
+        /* --- Fireworks Canvas --- */
+        #fireworks-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Behind all content */
+            pointer-events: none; /* Allows clicking through */
         }
     </style>
 </head>
 <body class="antialiased overflow-hidden">
+    
+    <canvas id="fireworks-canvas"></canvas>
 
     <!-- Animation Preloader -->
     <div id="animation-preloader" class="fixed inset-0 flex justify-center items-center z-50 transition-opacity duration-1000 ease-in-out" style="background-color: var(--bg-color);">
@@ -157,31 +131,16 @@
                 <h2 class="text-4xl md:text-5xl font-light mb-12">Itinerario</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-4xl mx-auto">
                     <div class="flex flex-col items-center">
-                        <div class="bg-white rounded-full p-4 shadow-md mb-4">
-                            <i class="fas fa-cocktail text-2xl" style="color: var(--primary-accent);"></i>
-                        </div>
-                        <div>
-                            <p class="text-2xl font-bold">5:00 PM</p>
-                            <p class="text-xl text-gray-600">Cóctel de Bienvenida</p>
-                        </div>
+                        <div class="bg-white rounded-full p-4 shadow-md mb-4"><i class="fas fa-cocktail text-2xl" style="color: var(--primary-accent);"></i></div>
+                        <div><p class="text-2xl font-bold">5:00 PM</p><p class="text-xl text-gray-600">Cóctel de Bienvenida</p></div>
                     </div>
                     <div class="flex flex-col items-center">
-                        <div class="bg-white rounded-full p-4 shadow-md mb-4">
-                            <i class="fas fa-dice text-2xl" style="color: var(--secondary-accent);"></i>
-                        </div>
-                        <div>
-                            <p class="text-2xl font-bold">6:30 PM</p>
-                            <p class="text-xl text-gray-600">Juegos y Sorpresas</p>
-                        </div>
+                        <div class="bg-white rounded-full p-4 shadow-md mb-4"><i class="fas fa-dice text-2xl" style="color: var(--secondary-accent);"></i></div>
+                        <div><p class="text-2xl font-bold">6:30 PM</p><p class="text-xl text-gray-600">Juegos y Sorpresas</p></div>
                     </div>
                     <div class="flex flex-col items-center">
-                        <div class="bg-white rounded-full p-4 shadow-md mb-4">
-                            <i class="fas fa-utensils text-2xl" style="color: var(--dark-accent);"></i>
-                        </div>
-                        <div>
-                            <p class="text-2xl font-bold">8:00 PM</p>
-                            <p class="text-xl text-gray-600">Cena y Brindis</p>
-                        </div>
+                        <div class="bg-white rounded-full p-4 shadow-md mb-4"><i class="fas fa-utensils text-2xl" style="color: var(--dark-accent);"></i></div>
+                        <div><p class="text-2xl font-bold">8:00 PM</p><p class="text-xl text-gray-600">Cena y Brindis</p></div>
                     </div>
                 </div>
             </div>
@@ -210,14 +169,10 @@
                     <p class="text-xl text-gray-700 mb-8">Por favor, confirma tu asistencia antes del 10 de Octubre.</p>
                     <div class="flex flex-col md:flex-row justify-center items-center gap-6">
                         <a href="https://wa.me/528311223359?text=Hola,%20quiero%20confirmar%20mi%20asistencia%20a%20la%20despedida%20de%20soltera%20de%20Mariann.%20Mi%20nombre%20es:" 
-                           target="_blank" 
-                           class="animated-button text-white px-10 py-4 rounded-lg font-bold shadow-lg inline-block text-xl"
-                           style="background-color: var(--primary-accent);">
+                           target="_blank" class="animated-button text-white px-10 py-4 rounded-lg font-bold shadow-lg inline-block text-xl" style="background-color: var(--primary-accent);">
                             <span><i class="fab fa-whatsapp"></i> Confirmar Asistencia</span>
                         </a>
-                        <a href="#" id="addToCalendar"
-                           class="animated-button text-white px-10 py-4 rounded-lg font-bold shadow-lg inline-block text-xl"
-                           style="background-color: var(--secondary-accent);">
+                        <a href="#" id="addToCalendar" class="animated-button text-white px-10 py-4 rounded-lg font-bold shadow-lg inline-block text-xl" style="background-color: var(--secondary-accent);">
                             <span><i class="fas fa-calendar-plus"></i> Añadir al Calendario</span>
                         </a>
                     </div>
@@ -238,10 +193,10 @@
         </section>
 
         <!-- Footer -->
-        <footer class="py-20 text-center" style="background-color: #F8F4EA;">
-            <div class="text-center">
-                <p class="text-2xl" style="color: var(--text-color);">Con cariño,</p>
-                <p class="text-4xl font-serif-display mt-2" style="color: var(--primary-accent);">Sra. Anita Mendoza</p>
+        <footer class="py-20 flex justify-center items-center" style="background-color: #F8F4EA;">
+             <div class="reveal footer-text text-center">
+                <p class="text-2xl" style="color: var(--text-color);">Organiza:</p>
+                <p class="text-4xl font-serif-display mt-2" style="color: var(--primary-accent);">Sra. Ma Ana Mendoza Hernandez</p>
             </div>
         </footer>
     </main>
@@ -261,6 +216,7 @@
                 
                 setTimeout(() => {
                     preloader.style.display = 'none';
+                    setupFireworks(); // Start fireworks after preloader
                 }, 1000); 
             }, preloaderDuration);
 
@@ -304,8 +260,8 @@
                 e.preventDefault();
                 
                 const title = encodeURIComponent("Despedida de Soltera de Mariann");
-                const startDate = "20251018T170000";
-                const endDate = "20251018T220000";
+                const startDate = "20251018T170000"; // YYYYMMDDTHHMMSS format
+                const endDate = "20251018T220000"; // 5 PM to 10 PM
                 const description = encodeURIComponent("¡No te pierdas la celebración de la Despedida de Soltera de Mariann!");
                 const location = encodeURIComponent("Banquetes Gero's, Cd. Mante, Tamaulipas");
                 
@@ -313,6 +269,155 @@
                 
                 window.open(googleCalendarUrl, '_blank');
             });
+
+            // --- Fireworks Logic ---
+            function setupFireworks() {
+                const canvas = document.getElementById('fireworks-canvas');
+                const ctx = canvas.getContext('2d');
+                let width = canvas.width = window.innerWidth;
+                let height = canvas.height = window.innerHeight;
+                let fireworks = [];
+                let particles = [];
+                const colors = ['#C09553', '#A7B6A9', '#FDFBF5', '#3D403D'];
+
+                function Firework(sx, sy, tx, ty) {
+                    this.x = sx;
+                    this.y = sy;
+                    this.sx = sx;
+                    this.sy = sy;
+                    this.tx = tx;
+                    this.ty = ty;
+                    this.distanceToTarget = Math.sqrt(Math.pow(tx - sx, 2) + Math.pow(ty - sy, 2));
+                    this.distanceTraveled = 0;
+                    this.coordinates = [];
+                    this.coordinateCount = 3;
+                    while (this.coordinateCount--) {
+                        this.coordinates.push([this.x, this.y]);
+                    }
+                    this.angle = Math.atan2(ty - sy, tx - sx);
+                    this.speed = 2;
+                    this.acceleration = 1.05;
+                    this.brightness = Math.random() * 50 + 50;
+                    this.targetRadius = 1;
+                }
+
+                Firework.prototype.update = function(index) {
+                    this.coordinates.pop();
+                    this.coordinates.unshift([this.x, this.y]);
+
+                    if (this.targetRadius < 8) {
+                        this.targetRadius += 0.3;
+                    } else {
+                        this.targetRadius = 1;
+                    }
+
+                    this.speed *= this.acceleration;
+                    let vx = Math.cos(this.angle) * this.speed;
+                    let vy = Math.sin(this.angle) * this.speed;
+                    this.distanceTraveled = Math.sqrt(Math.pow(this.x - this.sx, 2) + Math.pow(this.y - this.sy, 2));
+
+                    if (this.distanceTraveled >= this.distanceToTarget) {
+                        createParticles(this.tx, this.ty);
+                        fireworks.splice(index, 1);
+                    } else {
+                        this.x += vx;
+                        this.y += vy;
+                    }
+                };
+
+                Firework.prototype.draw = function() {
+                    ctx.beginPath();
+                    ctx.moveTo(this.coordinates[this.coordinates.length - 1][0], this.coordinates[this.coordinates.length - 1][1]);
+                    ctx.lineTo(this.x, this.y);
+                    ctx.strokeStyle = `hsl(${Math.random() * 60 + 30}, 100%, ${this.brightness}%)`;
+                    ctx.stroke();
+                };
+
+                function Particle(x, y) {
+                    this.x = x;
+                    this.y = y;
+                    this.coordinates = [];
+                    this.coordinateCount = 5;
+                    while (this.coordinateCount--) {
+                        this.coordinates.push([this.x, this.y]);
+                    }
+                    this.angle = Math.random() * Math.PI * 2;
+                    this.speed = Math.random() * 10 + 1;
+                    this.friction = 0.95;
+                    this.gravity = 1;
+                    this.hue = Math.random() * 60 + 30;
+                    this.brightness = Math.random() * 50 + 50;
+                    this.alpha = 1;
+                    this.decay = Math.random() * 0.03 + 0.015;
+                    this.color = colors[Math.floor(Math.random() * colors.length)];
+                }
+
+                Particle.prototype.update = function(index) {
+                    this.coordinates.pop();
+                    this.coordinates.unshift([this.x, this.y]);
+                    this.speed *= this.friction;
+                    this.x += Math.cos(this.angle) * this.speed;
+                    this.y += Math.sin(this.angle) * this.speed + this.gravity;
+                    this.alpha -= this.decay;
+
+                    if (this.alpha <= this.decay) {
+                        particles.splice(index, 1);
+                    }
+                };
+
+                Particle.prototype.draw = function() {
+                    ctx.beginPath();
+                    ctx.moveTo(this.coordinates[this.coordinates.length - 1][0], this.coordinates[this.coordinates.length - 1][1]);
+                    ctx.lineTo(this.x, this.y);
+                    ctx.strokeStyle = this.color;
+                    ctx.globalAlpha = this.alpha;
+                    ctx.stroke();
+                    ctx.globalAlpha = 1;
+                };
+
+                function createParticles(x, y) {
+                    let particleCount = 30;
+                    while (particleCount--) {
+                        particles.push(new Particle(x, y));
+                    }
+                }
+
+                function loop() {
+                    requestAnimationFrame(loop);
+                    ctx.globalCompositeOperation = 'destination-out';
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+                    ctx.fillRect(0, 0, width, height);
+                    ctx.globalCompositeOperation = 'lighter';
+
+                    let i = fireworks.length;
+                    while (i--) {
+                        fireworks[i].draw();
+                        fireworks[i].update(i);
+                    }
+
+                    let j = particles.length;
+                    while (j--) {
+                        particles[j].draw();
+                        particles[j].update(j);
+                    }
+                    
+                    // --- EDITAR VELOCIDAD DE FUEGOS ARTIFICIALES ---
+                    // Para reducir la frecuencia (hacerlos más lentos), disminuye el número de abajo.
+                    // Ejemplo: 0.015 es más lento que 0.04.
+                    // Para aumentar la frecuencia (hacerlos más rápidos), aumenta el número.
+                    // Ejemplo: 0.08 es más rápido que 0.04.
+                    if (Math.random() < 0.015) {
+                        fireworks.push(new Firework(width / 2, height, Math.random() * width, Math.random() * height / 2));
+                    }
+                }
+                
+                window.addEventListener('resize', () => {
+                    width = canvas.width = window.innerWidth;
+                    height = canvas.height = window.innerHeight;
+                });
+
+                loop();
+            }
         });
     </script>
 </body>
