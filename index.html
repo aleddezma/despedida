@@ -55,10 +55,13 @@
                     <p class="text-xl text-gray-700 mb-16 max-w-3xl mx-auto leading-relaxed">Será una tarde muy especial para compartir y acompañarla en esta nueva etapa de su vida.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <!-- Tarjeta de Fecha -->
                     <div class="reveal bg-white p-10 rounded-lg shadow-md border-t-8" style="border-color: var(--primary-accent);">
-                        <i class="fas fa-calendar-alt text-5xl mb-5"></i>
+                        <div class="pulsing-icon-wrapper">
+                            <i class="fas fa-calendar-alt text-5xl mb-5"></i>
+                        </div>
                         <h3 class="font-bold text-2xl">SÁBADO, 18 OCT.</h3>
-                        <div class="mt-6 border-t pt-4">
+                         <div class="mt-6 border-t pt-4">
                             <p class="text-md font-semibold text-gray-500 uppercase tracking-wider">Pronóstico del día</p>
                             <div class="flex items-center justify-center gap-4 mt-2">
                                 <i class="fas fa-cloud-sun text-4xl" style="color: var(--primary-accent);"></i>
@@ -69,12 +72,18 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Tarjeta de Hora -->
                     <div class="reveal bg-white p-10 rounded-lg shadow-md border-t-8" style="border-color: var(--secondary-accent); transition-delay: 150ms;">
-                        <i class="fas fa-clock text-5xl mb-5"></i>
+                        <div class="pulsing-icon-wrapper">
+                            <i class="fas fa-clock text-5xl mb-5"></i>
+                        </div>
                         <h3 class="font-bold text-2xl">5:00 PM</h3>
                     </div>
+                    <!-- Tarjeta de Ubicación -->
                     <div class="reveal bg-white p-10 rounded-lg shadow-md border-t-8 flex flex-col justify-center items-center" style="border-color: var(--dark-accent); transition-delay: 300ms;">
-                        <i class="fas fa-map-marker-alt text-5xl mb-5"></i>
+                        <div class="pulsing-icon-wrapper">
+                            <i class="fas fa-map-marker-alt text-5xl mb-5"></i>
+                        </div>
                         <h3 class="font-bold text-2xl">BANQUETES GERO'S</h3>
                         <a href="https://maps.app.goo.gl/KQd1mCyHV8YXS1C8A" target="_blank" class="mt-4 text-lg font-semibold text-gray-600 hover:text-gray-900 underline transition-colors decoration-2 underline-offset-4">
                             <i class="fas fa-map-pin"></i> Ver Ubicación
@@ -159,32 +168,28 @@
             </div>
         </section>
         
-
         <!-- Galería Post-Evento -->
         <section class="py-24 bg-white">
             <div class="container mx-auto text-center px-6 reveal">
                 <i class="fas fa-camera-retro text-6xl mb-6 floating-icon" style="color: var(--dark-accent); animation-delay: 1s;"></i>
-                <h2 class="text-4xl md:text-5xl font-light mb-6">GALERIA</h2>
+                <h2 class="text-4xl md:text-5xl font-light mb-6">Recuerdos de la Fiesta</h2>
                 <p class="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-                    Desliza para ver los mejores momentos de la celebración. ¡Gracias por haber sido parte de este día tan especial!
+                    Desliza para ver los mejores momentos o haz clic en una foto para verla en grande. ¡La galería avanza automáticamente!
                 </p>
                 
-                <!-- INICIO DE LA GALERÍA DE IMÁGENES -->
                 <div class="slider-container">
                     <div class="slider">
-                        
-                        <!-- =============================================================== -->
+                        <!-- ==================================================================== -->
                         <!-- == COMIENZA A REEMPLAZAR TUS IMÁGENES AQUÍ DENTRO DE CADA "src" == -->
-                        <!-- =============================================================== -->
-
+                        <!-- ==================================================================== -->
                         <div class="slide">
-                            <img src="https://github.com/aleddezma/despedida/blob/main/IMG-20250924-WA0016_x16.png?raw=true" alt="GALERIA 1">
+                            <img src="https://github.com/aleddezma/despedida/blob/main/IMG-20250924-WA0016_x16.png?raw=true" alt="Recuerdo de la fiesta 1">
                         </div>
                         <div class="slide">
-                            <img src="https://github.com/aleddezma/despedida/blob/main/IMG-20250924-WA0015_x16.png?raw=true" alt="GALERIA 2">
+                            <img src="https://github.com/aleddezma/despedida/blob/main/IMG-20250924-WA0015_x16.png?raw=true" alt="Recuerdo de la fiesta 2">
                         </div>
                         <div class="slide">
-                            <img src=https://github.com/aleddezma/despedida/blob/main/IMG-20250924-WA0014_x16.png?raw=true" alt="GALERIA 3">
+                            <img src="https://github.com/aleddezma/despedida/blob/main/IMG-20250924-WA0014_x16.png?raw=true" alt="Recuerdo de la fiesta 3">
                         </div>
                         <div class="slide">
                             <img src="https://images.unsplash.com/photo-1587598897424-de971d931346?q=80&w=1935&auto=format&fit=crop" alt="Recuerdo de la fiesta 4">
@@ -192,15 +197,11 @@
                         <div class="slide">
                             <img src="https://images.unsplash.com/photo-1521634502237-7a8e7a0321a4?q=80&w=2070&auto=format&fit=crop" alt="Recuerdo de la fiesta 5">
                         </div>
-
-                        <!-- =============================================================== -->
-                        <!-- ==               FIN DE LA ZONA DE IMÁGENES                  == -->
-                        <!-- =============================================================== -->
-
+                        <!-- ==================================================================== -->
+                        <!-- ==                   FIN DE LA ZONA DE IMÁGENES                   == -->
+                        <!-- ==================================================================== -->
                     </div>
                 </div>
-                <!-- FIN DE LA GALERÍA DE IMÁGENES -->
-
             </div>
         </section>
 
@@ -212,14 +213,11 @@
             </div>
         </footer>
 
-        <!-- ========================================================== -->
-        <!-- ==        VISTA PREVIA DE IMAGEN (LIGHTBOX)             == -->
-        <!-- ========================================================== -->
+        <!-- VISTA PREVIA DE IMAGEN (LIGHTBOX) -->
         <div id="image-lightbox">
             <span id="close-lightbox">&times;</span>
             <img id="lightbox-image" src="" alt="Vista previa de imagen">
         </div>
-
     </main>
 
     <script>
@@ -228,6 +226,7 @@
             const preloader = document.getElementById('animation-preloader');
             const mainContent = document.getElementById('main-content');
             const body = document.body;
+            // TIEMPO DE LA ANIMACIÓN DE CARGA (en milisegundos)
             const preloaderDuration = 2800; 
 
             setTimeout(() => {
@@ -237,11 +236,13 @@
                 
                 setTimeout(() => {
                     preloader.style.display = 'none';
-                    setupFireworks(); // Iniciar fuegos artificiales después de la precarga
-                }, 1000); 
+                    setupFireworks();
+                    setupGallery(); // Iniciar la galería después de la precarga
+                }, 1000); // Espera a que la transición de opacidad termine
             }, preloaderDuration);
 
             // --- Lógica de la Cuenta Regresiva ---
+            // EDITAR FECHA DEL EVENTO (Formato: AÑO-MES-DÍA T HORA:MINUTOS:SEGUNDOS)
             const eventDate = '2025-10-18T17:00:00';
             const targetDate = new Date(eventDate);
 
@@ -251,7 +252,7 @@
 
                 if (diff <= 0) { 
                     document.getElementById('countdown').innerHTML = `<p class="col-span-full text-4xl font-bold">¡El día llegó!</p>`;
-                    clearInterval(countdownInterval);
+                    if(window.countdownInterval) clearInterval(window.countdownInterval);
                     return; 
                 }
 
@@ -261,7 +262,7 @@
                 document.getElementById('seconds').textContent = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
             };
 
-            const countdownInterval = setInterval(updateCountdown, 1000);
+            window.countdownInterval = setInterval(updateCountdown, 1000);
             updateCountdown();
 
             // --- Lógica para Revelar al Desplazar ---
@@ -279,19 +280,70 @@
             // --- Lógica para Añadir al Calendario ---
             document.getElementById('addToCalendar').addEventListener('click', function(e) {
                 e.preventDefault();
-                
                 const title = encodeURIComponent("Despedida de Soltera de Mariann");
-                const startDate = "20251018T170000"; // Formato AAAA-MM-DDTHHMMSS
+                const startDate = "20251018T170000"; // Formato AAAA MM DD T HH MM SS
                 const endDate = "20251018T220000"; // 5 PM a 10 PM
                 const description = encodeURIComponent("¡No te pierdas la celebración de la Despedida de Soltera de Mariann!");
                 const location = encodeURIComponent("Banquetes Gero's, Cd. Mante, Tamaulipas");
-                
                 const googleCalendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${description}&location=${location}`;
-                
                 window.open(googleCalendarUrl, '_blank');
             });
 
-            // --- Lógica Avanzada de Fuegos Artificiales ---
+            // --- LÓGICA PARA LA GALERÍA DE IMÁGENES ---
+            function setupGallery() {
+                const slider = document.querySelector('.slider');
+                const slides = document.querySelectorAll('.slide');
+                const lightbox = document.getElementById('image-lightbox');
+                const lightboxImage = document.getElementById('lightbox-image');
+                const closeLightbox = document.getElementById('close-lightbox');
+                
+                if (!slider || slides.length === 0) return;
+
+                // --- EDITAR TIEMPO DEL DESPLAZAMIENTO AUTOMÁTICO ---
+                // Cambia el número de abajo. Está en milisegundos (4000 = 4 segundos).
+                const intervaloAutoplay = 4000;
+                let autoplayTimer;
+
+                const startAutoplay = () => {
+                    autoplayTimer = setInterval(() => {
+                        const sliderContainer = document.querySelector('.slider-container');
+                        let nextScrollLeft = sliderContainer.scrollLeft + slides[0].offsetWidth + 16;
+                        
+                        if (nextScrollLeft >= sliderContainer.scrollWidth - sliderContainer.clientWidth) {
+                            nextScrollLeft = 0;
+                        }
+                        sliderContainer.scrollLeft = nextScrollLeft;
+                    }, intervaloAutoplay);
+                };
+
+                const stopAutoplay = () => {
+                    clearInterval(autoplayTimer);
+                };
+
+                slides.forEach(slide => {
+                    slide.addEventListener('click', () => {
+                        const imgSrc = slide.querySelector('img').src;
+                        lightboxImage.src = imgSrc;
+                        lightbox.classList.add('visible');
+                        stopAutoplay();
+                    });
+                });
+
+                const closeFunction = () => {
+                    lightbox.classList.remove('visible');
+                    startAutoplay();
+                };
+                
+                closeLightbox.addEventListener('click', closeFunction);
+                lightbox.addEventListener('click', (e) => {
+                    if (e.target === lightbox) {
+                        closeFunction();
+                    }
+                });
+                startAutoplay();
+            }
+
+            // --- LÓGICA AVANZADA DE FUEGOS ARTIFICIALES ---
             function setupFireworks() {
                 const canvas = document.getElementById('fireworks-canvas');
                 const ctx = canvas.getContext('2d');
@@ -300,97 +352,22 @@
                 
                 let rockets = [];
                 let particles = [];
-                // --- EDITAR COLORES DE FUEGOS ARTIFICIALES ---
-                // Puedes añadir o quitar colores de esta lista para cambiar la paleta.
-                // Usa códigos de color HEX.
+                // EDITAR COLORES DE FUEGOS ARTIFICIALES
                 const colors = ['#C09553', '#A7B6A9', '#FFFFFF', '#FAD02C', '#FFD700'];
 
                 function launchRocket() {
-                    // --- EDITAR FRECUENCIA DE FUEGOS ARTIFICIALES ---
-                    // El número en `Math.random() > 0.98` controla la frecuencia.
-                    // Un número más alto (ej. 0.99) significa MENOS fuegos artificiales.
-                    // Un número más bajo (ej. 0.95) significa MÁS fuegos artificiales.
+                    // EDITAR FRECUENCIA DE FUEGOS ARTIFICIALES
                     if (Math.random() > 0.98) {
                         rockets.push(new Rocket(width / 2));
                     }
                 }
 
-                class Particle {
-                    constructor(x, y, color) {
-                        this.x = x;
-                        this.y = y;
-                        this.color = color;
-                        this.size = Math.random() * 2 + 1;
-                        this.alpha = 1;
-                        this.decay = Math.random() * 0.015 + 0.015;
-                        this.angle = Math.random() * Math.PI * 2;
-                        this.speed = Math.random() * 6 + 1;
-                        this.gravity = 0.1;
-                        this.velocity = {
-                            x: Math.cos(this.angle) * this.speed,
-                            y: Math.sin(this.angle) * this.speed
-                        };
-                    }
-                    update() {
-                        this.velocity.y += this.gravity;
-                        this.x += this.velocity.x;
-                        this.y += this.velocity.y;
-                        this.alpha -= this.decay;
-                    }
-                    draw() {
-                        ctx.save();
-                        ctx.globalAlpha = this.alpha;
-                        ctx.beginPath();
-                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                        ctx.fillStyle = this.color;
-                        ctx.fill();
-                        ctx.restore();
-                    }
-                }
-
-                class Rocket {
-                    constructor(x) {
-                        this.x = x;
-                        this.y = height + 10;
-                        this.color = colors[Math.floor(Math.random() * colors.length)];
-                        this.size = 3;
-                        this.velocity = { x: Math.random() * 6 - 3, y: -(Math.random() * 10 + 15) };
-                        this.trail = [];
-                    }
-                    explode() {
-                        const particleCount = 100;
-                        for (let i = 0; i < particleCount; i++) {
-                            particles.push(new Particle(this.x, this.y, this.color));
-                        }
-                    }
-                    update() {
-                        this.y += this.velocity.y;
-                        this.x += this.velocity.x;
-                        this.velocity.y += 0.2; // gravedad sobre el cohete
-                        this.trail.unshift({x: this.x, y: this.y});
-                        if(this.trail.length > 10) this.trail.pop();
-                    }
-                    draw() {
-                        ctx.beginPath();
-                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                        ctx.fillStyle = this.color;
-                        ctx.fill();
-
-                        // Dibujar estela
-                        ctx.beginPath();
-                        ctx.moveTo(this.x, this.y);
-                        for(const p of this.trail){
-                           ctx.lineTo(p.x, p.y);
-                        }
-                        ctx.strokeStyle = this.color;
-                        ctx.lineWidth = 1;
-                        ctx.stroke();
-                    }
-                }
+                class Particle { /* ...código de partícula... */ }
+                class Rocket { /* ...código de cohete... */ }
                 
                 function animate() {
                     requestAnimationFrame(animate);
-                    ctx.fillStyle = 'rgba(253, 251, 245, 0.1)'; // Efecto de estela
+                    ctx.fillStyle = 'rgba(253, 251, 245, 0.1)';
                     ctx.fillRect(0, 0, width, height);
                     
                     launchRocket();
@@ -412,6 +389,9 @@
                         }
                     }
                 }
+                // (Se omitió el detalle interno de las clases por brevedad)
+                Particle=function(x,y,color){this.x=x;this.y=y;this.color=color;this.size=Math.random()*2+1;this.alpha=1;this.decay=Math.random()*0.015+0.015;this.angle=Math.random()*Math.PI*2;this.speed=Math.random()*6+1;this.gravity=0.1;this.velocity={x:Math.cos(this.angle)*this.speed,y:Math.sin(this.angle)*this.speed};};Particle.prototype.update=function(){this.velocity.y+=this.gravity;this.x+=this.velocity.x;this.y+=this.velocity.y;this.alpha-=this.decay;};Particle.prototype.draw=function(){ctx.save();ctx.globalAlpha=this.alpha;ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2,false);ctx.fillStyle=this.color;ctx.fill();ctx.restore();};
+                Rocket=function(x){this.x=x;this.y=height+10;this.color=colors[Math.floor(Math.random()*colors.length)];this.size=3;this.velocity={x:Math.random()*6-3,y:-(Math.random()*10+15)};this.trail=[];};Rocket.prototype.explode=function(){const particleCount=100;for(let i=0;i<particleCount;i++){particles.push(new Particle(this.x,this.y,this.color));}};Rocket.prototype.update=function(){this.y+=this.velocity.y;this.x+=this.velocity.x;this.velocity.y+=0.2;this.trail.unshift({x:this.x,y:this.y});if(this.trail.length>10)this.trail.pop();};Rocket.prototype.draw=function(){ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2,false);ctx.fillStyle=this.color;ctx.fill();ctx.beginPath();ctx.moveTo(this.x,this.y);for(const p of this.trail){ctx.lineTo(p.x,p.y);}ctx.strokeStyle=this.color;ctx.lineWidth=1;ctx.stroke();};
 
                 window.addEventListener('resize', () => {
                     width = canvas.width = window.innerWidth;
