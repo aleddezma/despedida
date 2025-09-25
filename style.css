@@ -142,3 +142,4 @@ body { font-family: 'Poppins', sans-serif; background-color: var(--bg-color); co
 #next-image { right: 1rem; }
 .lightbox-control:hover { transform: translateY(-50%) scale(1.1); }
 #close-lightbox:hover { transform: scale(1.1); }
+
