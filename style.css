@@ -8,9 +8,6 @@
 body { font-family: 'Poppins', sans-serif; background-color: var(--bg-color); color: var(--text-color); }
 .font-serif-display { font-family: 'Dancing Script', cursive; }
 
-/* --- EDITAR IMAGEN DE FONDO PRINCIPAL --- */
-/* Cambia la URL de abajo para usar tu propia imagen de fondo. */
-
 .reveal {
     opacity: 0;
     transform: translateY(30px);
@@ -57,7 +54,6 @@ body { font-family: 'Poppins', sans-serif; background-color: var(--bg-color); co
  justify-content: center;
  text-decoration: none;
 }
-/* (Se omitió el resto de los estilos de los botones por brevedad) */
 .btn { position: relative; min-width: 160px; min-height: calc(var(--corner-dist) * 2); border-radius: 16px; border: none; padding: 0.25em 1em; background: linear-gradient(#fff2, #0001), var(--btn-color); box-shadow: 1px 1px 2px -1px #fff inset, 0 2px 1px #00000010, 0 4px 2px #00000010, 0 8px 4px #00000010, 0 16px 8px #00000010, 0 32px 16px #00000010; transition: transform var(--duration) var(--timing-function), filter var(--duration) var(--timing-function); -webkit-transition: transform var(--duration) var(--timing-function), -webkit-filter var(--duration) var(--timing-function); cursor: pointer; }
 .btn-drawer { position: absolute; display: flex; justify-content: center; min-height: 32px; border-radius: 16px; border: none; padding: 0.25em 1em; font-size: 0.8em; font-weight: 600; font-family: "Poppins", monospace; color: #0009; background: linear-gradient(#fff2, #0001), var(--btn-color); opacity: 0; transition: transform calc(0.5 * var(--duration)) ease, filter var(--duration) var(--timing-function), opacity calc(0.5 * var(--duration)) ease; -webkit-transition: transform calc(0.5 * var(--duration)) ease, -webkit-filter var(--duration) var(--timing-function), opacity calc(0.5 * var(--duration)) ease; filter: blur(2px); -webkit-filter: blur(2px); }
 .transition-top { top: 0; left: 0; border-radius: 12px 12px 0 0; align-items: start; }
@@ -76,37 +72,12 @@ body { font-family: 'Poppins', sans-serif; background-color: var(--bg-color); co
 .btn-container:hover, .btn-container:focus-visible { --corner-color: #0004; }
 .btn-container:hover .btn-corner:first-of-type, .btn-container:focus-visible .btn-corner:first-of-type { transform: translate(calc(-1 * var(--corner-multiplier) * var(--corner-dist)), calc(-1 * var(--corner-multiplier) * var(--corner-dist))) rotate(90deg); filter: drop-shadow(-10px 10px 1px var(--corner-color)) drop-shadow(-20px 20px 2px var(--corner-color)); -webkit-filter: drop-shadow(-10px 10px 1px var(--corner-color)) drop-shadow(-20px 20px 2px var(--corner-color)); }
 .btn-container:hover .btn-corner:nth-of-type(2), .btn-container:focus-visible .btn-corner:nth-of-type(2) { transform: translate(calc(var(--corner-multiplier) * var(--corner-dist)), calc(-1 * var(--corner-multiplier) * var(--corner-dist))) rotate(180deg); filter: drop-shadow(-10px 10px 1px var(--corner-color)) drop-shadow(-20px 20px 2px var(--corner-color)); -webkit-filter: drop-shadow(-10px 10px 1px var(--corner-color)) drop-shadow(-20px 20px 2px var(--corner-color)); }
-@-moz-document url-prefix() { .btn-container:hover .btn-corner:nth-of-type(2), .btn-container:focus-visible .btn-corner:nth-of-type(2) { filter: drop-shadow(10px -10px 1px var(--corner-color)) drop-shadow(20px -20px 2px var(--corner-color)); } }
 .btn-container:hover .btn-corner:nth-of-type(3), .btn-container:focus-visible .btn-corner:nth-of-type(3) { transform: translate(calc(var(--corner-multiplier) * var(--corner-dist)), calc(var(--corner-multiplier) * var(--corner-dist))) rotate(-90deg); filter: drop-shadow(-10px 10px 1px var(--corner-color)) drop-shadow(-20px 20px 2px var(--corner-color)); -webkit-filter: drop-shadow(-10px 10px 1px var(--corner-color)) drop-shadow(-20px 20px 2px var(--corner-color)); }
 .btn-container:hover .btn-corner:nth-of-type(4), .btn-container:focus-visible .btn-corner:nth-of-type(4) { transform: translate(calc(-1 * var(--corner-multiplier) * var(--corner-dist)), calc(var(--corner-multiplier) * var(--corner-dist))) rotate(0deg); filter: drop-shadow(-10px 10px 1px var(--corner-color)) drop-shadow(-20px 20px 2px var(--corner-color)); -webkit-filter: drop-shadow(-10px 10px 1px var(--corner-color)) drop-shadow(-20px 20px 2px var(--corner-color)); }
 .btn-container:active .btn { transform: scale(0.95); filter: drop-shadow(0 10px 4px #0002); -webkit-filter: drop-shadow(0 10px 4px #0002); }
 .btn-container:active .transition-top, .btn-container:active .transition-bottom { transform: translateY(0px) scale(0.5); }
 .btn-container:active .btn-text { filter: drop-shadow(0 1px 0 #fff6) drop-shadow(0 -1px 0 #0006) drop-shadow(0px 6px 2px #0003); -webkit-filter: drop-shadow(0 1px 0 #fff6) drop-shadow(0 -1px 0 #0006) drop-shadow(0px 6px 2px #0003); transform: scale(1); color: #000a; }
-.btn-container:active { --corner-color: #0005; --corner-multiplier: 0.95; }
-@keyframes hue-anim { 0%, 100% { filter: hue-rotate(0deg); -webkit-filter: hue-rotate(0deg); } 50% { filter: hue-rotate(-70deg); -webkit-filter: hue-rotate(-70deg); } }
-@-webkit-keyframes hue-anim { 0%, 100% { -webkit-filter: hue-rotate(0deg); } 50% { -webkit-filter: hue-rotate(-70deg); } }
-
-/* --- ESTILO PARA ICONOS PULSANTES --- */
-.pulsing-icon-wrapper {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-}
-.pulsing-icon-wrapper i { z-index: 2; }
-.pulsing-icon-wrapper::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  box-shadow: 0 0 0 0 rgba(192, 149, 83, 0.7);
-  transform: scale(1);
-  animation: pulse-effect 2.2s infinite;
-  z-index: 1;
-}
-@keyframes pulse-effect { to { transform: scale(2.5); box-shadow: 0 0 0 30px rgba(192, 149, 83, 0); } }
+@keyframes hue-anim { 0%, 100% { filter: hue-rotate(0deg); } 50% { filter: hue-rotate(-70deg); } }
 
 /* --- ESTILOS PARA LA GALERÍA DE IMÁGENES (SLIDER) --- */
 .slider-container {
