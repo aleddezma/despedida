@@ -172,7 +172,7 @@
         <section class="py-24 bg-white">
             <div class="container mx-auto text-center px-6 reveal">
                 <i class="fas fa-camera-retro text-6xl mb-6 floating-icon" style="color: var(--dark-accent); animation-delay: 1s;"></i>
-                <h2 class="text-4xl md:text-5xl font-light mb-6">Recuerdos de la Fiesta</h2>
+                <h2 class="text-4xl md:text-5xl font-light mb-6">GALERIA</h2>
                 <p class="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
                     Desliza para ver los mejores momentos o haz clic en una foto para verla en grande. ¡La galería avanza automáticamente!
                 </p>
@@ -213,9 +213,11 @@
             </div>
         </footer>
 
-        <!-- VISTA PREVIA DE IMAGEN (LIGHTBOX) -->
+        <!-- VISTA PREVIA DE IMAGEN (LIGHTBOX) CON NAVEGACIÓN -->
         <div id="image-lightbox">
-            <span id="close-lightbox">&times;</span>
+            <span id="close-lightbox" class="lightbox-control">&times;</span>
+            <span id="prev-image" class="lightbox-control">&#10094;</span>
+            <span id="next-image" class="lightbox-control">&#10095;</span>
             <img id="lightbox-image" src="" alt="Vista previa de imagen">
         </div>
     </main>
@@ -226,7 +228,6 @@
             const preloader = document.getElementById('animation-preloader');
             const mainContent = document.getElementById('main-content');
             const body = document.body;
-            // TIEMPO DE LA ANIMACIÓN DE CARGA (en milisegundos)
             const preloaderDuration = 2800; 
 
             setTimeout(() => {
@@ -238,11 +239,10 @@
                     preloader.style.display = 'none';
                     setupFireworks();
                     setupGallery(); // Iniciar la galería después de la precarga
-                }, 1000); // Espera a que la transición de opacidad termine
+                }, 1000); 
             }, preloaderDuration);
 
             // --- Lógica de la Cuenta Regresiva ---
-            // EDITAR FECHA DEL EVENTO (Formato: AÑO-MES-DÍA T HORA:MINUTOS:SEGUNDOS)
             const eventDate = '2025-10-18T17:00:00';
             const targetDate = new Date(eventDate);
 
@@ -281,34 +281,51 @@
             document.getElementById('addToCalendar').addEventListener('click', function(e) {
                 e.preventDefault();
                 const title = encodeURIComponent("Despedida de Soltera de Mariann");
-                const startDate = "20251018T170000"; // Formato AAAA MM DD T HH MM SS
-                const endDate = "20251018T220000"; // 5 PM a 10 PM
+                const startDate = "20251018T170000";
+                const endDate = "20251018T220000";
                 const description = encodeURIComponent("¡No te pierdas la celebración de la Despedida de Soltera de Mariann!");
                 const location = encodeURIComponent("Banquetes Gero's, Cd. Mante, Tamaulipas");
                 const googleCalendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${description}&location=${location}`;
                 window.open(googleCalendarUrl, '_blank');
             });
 
-            // --- LÓGICA PARA LA GALERÍA DE IMÁGENES ---
+            // --- LÓGICA PARA LA GALERÍA DE IMÁGENES MEJORADA ---
             function setupGallery() {
-                const slider = document.querySelector('.slider');
-                const slides = document.querySelectorAll('.slide');
+                const slides = Array.from(document.querySelectorAll('.slide'));
                 const lightbox = document.getElementById('image-lightbox');
                 const lightboxImage = document.getElementById('lightbox-image');
                 const closeLightbox = document.getElementById('close-lightbox');
+                const prevButton = document.getElementById('prev-image');
+                const nextButton = document.getElementById('next-image');
                 
-                if (!slider || slides.length === 0) return;
+                if (slides.length === 0) return;
 
-                // --- EDITAR TIEMPO DEL DESPLAZAMIENTO AUTOMÁTICO ---
-                // Cambia el número de abajo. Está en milisegundos (4000 = 4 segundos).
-                const intervaloAutoplay = 4000;
+                let currentImageIndex = 0;
                 let autoplayTimer;
+                const intervaloAutoplay = 4000; // 4 segundos
 
+                // Función para mostrar una imagen específica en el lightbox
+                const showImage = (index) => {
+                    currentImageIndex = index;
+                    const imgSrc = slides[currentImageIndex].querySelector('img').src;
+                    lightboxImage.src = imgSrc;
+                };
+
+                // Funciones para navegar a la imagen siguiente/anterior
+                const showNextImage = () => {
+                    const nextIndex = (currentImageIndex + 1) % slides.length;
+                    showImage(nextIndex);
+                };
+                const showPrevImage = () => {
+                    const prevIndex = (currentImageIndex - 1 + slides.length) % slides.length;
+                    showImage(prevIndex);
+                };
+
+                // Lógica del autoplay
                 const startAutoplay = () => {
                     autoplayTimer = setInterval(() => {
                         const sliderContainer = document.querySelector('.slider-container');
                         let nextScrollLeft = sliderContainer.scrollLeft + slides[0].offsetWidth + 16;
-                        
                         if (nextScrollLeft >= sliderContainer.scrollWidth - sliderContainer.clientWidth) {
                             nextScrollLeft = 0;
                         }
@@ -319,27 +336,37 @@
                 const stopAutoplay = () => {
                     clearInterval(autoplayTimer);
                 };
-
-                slides.forEach(slide => {
+                
+                // Abrir el lightbox
+                slides.forEach((slide, index) => {
                     slide.addEventListener('click', () => {
-                        const imgSrc = slide.querySelector('img').src;
-                        lightboxImage.src = imgSrc;
+                        showImage(index);
                         lightbox.classList.add('visible');
                         stopAutoplay();
                     });
                 });
 
+                // Cerrar el lightbox
                 const closeFunction = () => {
                     lightbox.classList.remove('visible');
                     startAutoplay();
                 };
-                
                 closeLightbox.addEventListener('click', closeFunction);
                 lightbox.addEventListener('click', (e) => {
-                    if (e.target === lightbox) {
-                        closeFunction();
+                    if (e.target === lightbox) closeFunction();
+                });
+
+                // Eventos para los botones de navegación y teclado
+                prevButton.addEventListener('click', showPrevImage);
+                nextButton.addEventListener('click', showNextImage);
+                document.addEventListener('keydown', (e) => {
+                    if (lightbox.classList.contains('visible')) {
+                        if (e.key === 'ArrowLeft') showPrevImage();
+                        if (e.key === 'ArrowRight') showNextImage();
+                        if (e.key === 'Escape') closeFunction();
                     }
                 });
+
                 startAutoplay();
             }
 
@@ -349,29 +376,20 @@
                 const ctx = canvas.getContext('2d');
                 let width = canvas.width = window.innerWidth;
                 let height = canvas.height = window.innerHeight;
-                
-                let rockets = [];
-                let particles = [];
-                // EDITAR COLORES DE FUEGOS ARTIFICIALES
+                let rockets = [], particles = [];
                 const colors = ['#C09553', '#A7B6A9', '#FFFFFF', '#FAD02C', '#FFD700'];
 
-                function launchRocket() {
-                    // EDITAR FRECUENCIA DE FUEGOS ARTIFICIALES
-                    if (Math.random() > 0.98) {
-                        rockets.push(new Rocket(width / 2));
-                    }
-                }
-
-                class Particle { /* ...código de partícula... */ }
-                class Rocket { /* ...código de cohete... */ }
+                function launchRocket() { if (Math.random() > 0.98) rockets.push(new Rocket(width / 2)); }
                 
+                // (Se omitió el detalle interno de las clases por brevedad para no extender el código)
+                Particle=function(x,y,color){this.x=x;this.y=y;this.color=color;this.size=Math.random()*2+1;this.alpha=1;this.decay=Math.random()*0.015+0.015;this.angle=Math.random()*Math.PI*2;this.speed=Math.random()*6+1;this.gravity=0.1;this.velocity={x:Math.cos(this.angle)*this.speed,y:Math.sin(this.angle)*this.speed};};Particle.prototype.update=function(){this.velocity.y+=this.gravity;this.x+=this.velocity.x;this.y+=this.velocity.y;this.alpha-=this.decay;};Particle.prototype.draw=function(){ctx.save();ctx.globalAlpha=this.alpha;ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2,false);ctx.fillStyle=this.color;ctx.fill();ctx.restore();};
+                Rocket=function(x){this.x=x;this.y=height+10;this.color=colors[Math.floor(Math.random()*colors.length)];this.size=3;this.velocity={x:Math.random()*6-3,y:-(Math.random()*10+15)};this.trail=[];};Rocket.prototype.explode=function(){const particleCount=100;for(let i=0;i<particleCount;i++){particles.push(new Particle(this.x,this.y,this.color));}};Rocket.prototype.update=function(){this.y+=this.velocity.y;this.x+=this.velocity.x;this.velocity.y+=0.2;this.trail.unshift({x:this.x,y:this.y});if(this.trail.length>10)this.trail.pop();};Rocket.prototype.draw=function(){ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2,false);ctx.fillStyle=this.color;ctx.fill();ctx.beginPath();ctx.moveTo(this.x,this.y);for(const p of this.trail){ctx.lineTo(p.x,p.y);}ctx.strokeStyle=this.color;ctx.lineWidth=1;ctx.stroke();};
+
                 function animate() {
                     requestAnimationFrame(animate);
                     ctx.fillStyle = 'rgba(253, 251, 245, 0.1)';
                     ctx.fillRect(0, 0, width, height);
-                    
                     launchRocket();
-
                     for (let i = rockets.length - 1; i >= 0; i--) {
                         rockets[i].update();
                         rockets[i].draw();
@@ -380,24 +398,16 @@
                             rockets.splice(i, 1);
                         }
                     }
-
                     for (let i = particles.length - 1; i >= 0; i--) {
                         particles[i].update();
                         particles[i].draw();
-                        if (particles[i].alpha <= 0) {
-                            particles.splice(i, 1);
-                        }
+                        if (particles[i].alpha <= 0) particles.splice(i, 1);
                     }
                 }
-                // (Se omitió el detalle interno de las clases por brevedad)
-                Particle=function(x,y,color){this.x=x;this.y=y;this.color=color;this.size=Math.random()*2+1;this.alpha=1;this.decay=Math.random()*0.015+0.015;this.angle=Math.random()*Math.PI*2;this.speed=Math.random()*6+1;this.gravity=0.1;this.velocity={x:Math.cos(this.angle)*this.speed,y:Math.sin(this.angle)*this.speed};};Particle.prototype.update=function(){this.velocity.y+=this.gravity;this.x+=this.velocity.x;this.y+=this.velocity.y;this.alpha-=this.decay;};Particle.prototype.draw=function(){ctx.save();ctx.globalAlpha=this.alpha;ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2,false);ctx.fillStyle=this.color;ctx.fill();ctx.restore();};
-                Rocket=function(x){this.x=x;this.y=height+10;this.color=colors[Math.floor(Math.random()*colors.length)];this.size=3;this.velocity={x:Math.random()*6-3,y:-(Math.random()*10+15)};this.trail=[];};Rocket.prototype.explode=function(){const particleCount=100;for(let i=0;i<particleCount;i++){particles.push(new Particle(this.x,this.y,this.color));}};Rocket.prototype.update=function(){this.y+=this.velocity.y;this.x+=this.velocity.x;this.velocity.y+=0.2;this.trail.unshift({x:this.x,y:this.y});if(this.trail.length>10)this.trail.pop();};Rocket.prototype.draw=function(){ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2,false);ctx.fillStyle=this.color;ctx.fill();ctx.beginPath();ctx.moveTo(this.x,this.y);for(const p of this.trail){ctx.lineTo(p.x,p.y);}ctx.strokeStyle=this.color;ctx.lineWidth=1;ctx.stroke();};
-
                 window.addEventListener('resize', () => {
                     width = canvas.width = window.innerWidth;
                     height = canvas.height = window.innerHeight;
                 });
-
                 animate();
             }
         });
