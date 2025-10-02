@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Despedida de Soltera</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-body">
+    <div id="login-container" class="admin-card">
+        <h1 class="admin-title">Acceso de Administrador</h1>
+        <p class="mb-4 text-gray-600">Ingresa la contraseña para gestionar la lista.</p>
+        <input type="password" id="password" placeholder="Contraseña" class="admin-input">
+        <button id="login-button" class="admin-button">Entrar</button>
+        <p id="login-error" class="text-red-500 mt-2 hidden">Contraseña incorrecta.</p>
+    </div>
+
+    <div id="admin-panel" class="admin-card hidden">
+        <div>
+            <h2 class="admin-title text-2xl">Añadir Invitada</h2>
+            <input type="text" id="guest-name" placeholder="Nombre Completo de la invitada" class="admin-input">
+            <button id="add-guest-button" class="admin-button">Agregar Invitada</button>
+            <p id="success-message" class="text-green-600 font-semibold mt-4 hidden">¡Invitada añadida!</p>
+        </div>
+
+        <div class="admin-guest-list">
+            <h2 class="admin-title text-2xl mb-4">Lista de Confirmadas</h2>
+            <div id="current-guests">
+                <!-- La lista de invitadas para administrar se cargará aquí -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Importar los módulos de Firebase -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
+
+        // Tu configuración de Firebase ya está integrada
+        const firebaseConfig = {
+            apiKey: "AIzaSyBTxhUUF0t9TDGnyu7wlosUyzMKftaqL3k",
+            authDomain: "despedida-mariann.firebaseapp.com",
+            projectId: "despedida-mariann",
+            storageBucket: "despedida-mariann.firebasestorage.app",
+            messagingSenderId: "392700998091",
+            appId: "1:392700998091:web:165919c9576de8fcc4864e"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const guestsCollection = collection(db, "invitadas");
+
+        const loginContainer = document.getElementById('login-container');
+        const adminPanel = document.getElementById('admin-panel');
+        const passwordInput = document.getElementById('password');
+        const loginButton = document.getElementById('login-button');
+        const loginError = document.getElementById('login-error');
+        const guestNameInput = document.getElementById('guest-name');
+        const addGuestButton = document.getElementById('add-guest-button');
+        const successMessage = document.getElementById('success-message');
+        const currentGuestsContainer = document.getElementById('current-guests');
+        
+        const ADMIN_PASSWORD = "mariann2025";
+
+        // Lógica de Login
+        loginButton.addEventListener('click', () => {
+            if (passwordInput.value === ADMIN_PASSWORD) {
+                loginContainer.classList.add('hidden');
+                adminPanel.classList.remove('hidden');
+                loadGuests();
+            } else {
+                loginError.classList.remove('hidden');
+                passwordInput.value = '';
+            }
+        });
+        passwordInput.addEventListener('keyup', (event) => { if (event.key === 'Enter') loginButton.click(); });
+
+        // Lógica para añadir invitada
+        addGuestButton.addEventListener('click', async () => {
+            const name = guestNameInput.value.trim();
+            if (name) {
+                try {
+                    await addDoc(guestsCollection, { name: name, timestamp: serverTimestamp() });
+                    guestNameInput.value = '';
+                    successMessage.classList.remove('hidden');
+                    setTimeout(() => successMessage.classList.add('hidden'), 3000);
+                } catch (e) { console.error("Error al añadir: ", e); }
+            }
+        });
+        guestNameInput.addEventListener('keyup', (event) => { if (event.key === 'Enter') addGuestButton.click(); });
+
+        // Cargar y mostrar invitadas (con opción de eliminar)
+        function loadGuests() {
+            const q = query(guestsCollection, orderBy("timestamp", "asc"));
+            onSnapshot(q, (snapshot) => {
+                currentGuestsContainer.innerHTML = '';
+                if (snapshot.empty) {
+                    currentGuestsContainer.innerHTML = '<p class="text-gray-500">Aún no hay invitadas confirmadas.</p>';
+                } else {
+                    snapshot.forEach((document) => {
+                        const guest = document.data();
+                        const guestDiv = document.createElement('div');
+                        guestDiv.className = 'admin-guest-item';
+                        
+                        const nameSpan = document.createElement('span');
+                        nameSpan.textContent = guest.name;
+
+                        const deleteButton = document.createElement('button');
+                        deleteButton.className = 'delete-btn';
+                        deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i>';
+                        deleteButton.onclick = async () => {
+                            if (confirm(`¿Seguro que quieres eliminar a ${guest.name}?`)) {
+                                await deleteDoc(doc(db, "invitadas", document.id));
+                            }
+                        };
+
+                        guestDiv.appendChild(nameSpan);
+                        guestDiv.appendChild(deleteButton);
+                        currentGuestsContainer.appendChild(guestDiv);
+                    });
+                }
+            });
+        }
+    </script>
+</body>
+</html>
